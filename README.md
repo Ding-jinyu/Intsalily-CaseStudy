@@ -1,70 +1,99 @@
-# Getting Started with Create React App
+# **PartSelect Chatbot**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a chatbot designed to assist users with machine parts on the PartSelect e-commerce website. It integrates a **FAISS vector database** for relevance checking, **Puppeteer** for fetching part details, and the **DeepSeek API** for generating natural responses.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## **Setup Instructions**
 
-### `npm start`
+### **1. Clone the Repository**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+git clone https://github.com/Ding-jinyu/Intsalily-CaseStudy.git
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+### **2. Set Up Environment Variables**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+1. Navigate to the `backend` directory:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```
+   cd backend
+   ```
+2. Create a `.env` file:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```
+   touch .env
+   ```
+3. Add the following keys to the `.env` file:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```
+   DEEPSEEK_API_KEY=your_deepseek_api_key_here
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
 
-### `npm run eject`
+   Replace `your_deepseek_api_key_here` `your_openai_api_key_here` with your actual API key.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **3. Start the FAISS Microservice**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Navigate to the `backend` directory:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```
+   cd backend
+   ```
+2. Run the FAISS microservice:
 
-## Learn More
+   ```
+   python faiss_microservice.py
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   This will start the FAISS server on port `5002`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### **4. Start the Backend Server**
 
-### Code Splitting
+1. In the `backend` directory, start the backend server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   ```
+   node server.js
+   ```
 
-### Analyzing the Bundle Size
+   This will start the backend server on port `5001`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+### **5. Start the Frontend**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Navigate to the `frontend` directory:
 
-### Advanced Configuration
+   ```
+   cd ../frontend
+   ```
+2. Start the frontend development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   ```
+   npm start
+   ```
 
-### Deployment
+   This will start the frontend on port `3000`. Open your browser and navigate to `http://localhost:3000` to view the chatbot.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## **Project Structure**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Copy
+
+```
+partselect-chatbot/
+├── backend/
+│   ├── server.js               # Backend server (Node.js/Express)
+│   ├── faiss_microservice.py   # FAISS vector database server
+│   ├── .env                    # Environment variables for API keys
+│   └── ...                     # Other backend files
+├── frontend/
+│   ├── public/                 # Static assets and HTML template
+│   ├── src/                    # React components and styles
+│   └── ...                     # Other frontend files
+└── README.md                   # Project documentation
+```
